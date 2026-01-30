@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Joy-Con Inactivity Timer</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="wrap">
+    <header class="header">
+      <h1>Joy-Con Inactivity Timer</h1>
+      <p class="subtitle">Pull left → release → starts a 15-minute countdown.</p>
+    </header>
+
+    <section class="card">
+      <div class="statusRow">
+        <div class="pill">
+          <span id="dot" class="dot bad"></span>
+          <span id="statusText">No controller detected</span>
+        </div>
+        <div class="pill">
+          <span class="muted">Controller:</span>
+          <span id="controllerName">—</span>
+        </div>
+      </div>
+
+      <p class="hint muted">
+        Tip: pair your Joy-Con via Bluetooth, then press any button once so the browser registers it.
+      </p>
+    </section>
+
+    <section class="card">
+      <div class="timer" id="timerText">15:00</div>
+      <div class="mode muted" id="modeText">Waiting for release…</div>
+
+      <div class="grid">
+        <div>
+          <label>Timer length (minutes)</label>
+          <input id="minutes" type="number" min="1" max="180" value="15" />
+        </div>
+
+        <div>
+          <label>Left stick X axis index</label>
+          <input id="axisIndex" type="number" min="0" max="10" value="0" />
+          <div class="tiny muted">If it doesn’t trigger, use Debug to find the correct axis.</div>
+        </div>
+
+        <div>
+          <label>Pull-left threshold</label>
+          <input id="threshold" type="number" min="0.10" max="0.99" step="0.01" value="0.60" />
+          <div class="tiny muted">Higher means you must pull farther left.</div>
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button id="resetBtn">Reset</button>
+        <button id="debugBtn">Toggle debug</button>
+        <span class="tiny muted" id="liveAxisText"></span>
+      </div>
+
+      <div id="debugPanel" class="debug" hidden>
+        <div class="tiny muted">Axes + buttons (live):</div>
+        <pre id="debugPre"></pre>
+      </div>
+    </section>
+
+    <footer class="footer muted">
+      Runs locally in your browser using the Gamepad API.
+    </footer>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
